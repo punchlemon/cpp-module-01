@@ -1,4 +1,3 @@
-#include <cstdlib>
 #include "Zombie.hpp"
 
 int main( void ) {
@@ -8,5 +7,5 @@ int main( void ) {
         horde[i].announce();
     }
     delete[] horde;
-    return EXIT_SUCCESS;
+    return 0;
 }
