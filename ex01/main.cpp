@@ -1,6 +1,6 @@
 #include "Zombie.hpp"
 
-int main( void ) {
+int main(void) {
     int num = 5;
     Zombie *horde = zombieHorde(num, "Joe");
     for (int i = 0; i < num; i++) {
