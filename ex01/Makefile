@@ -7,7 +7,6 @@ OUT_DIR = out
 SRCS = \
 $(addsuffix .cpp, \
 	main \
-	newZombie \
 	zombieHorde \
 	Zombie \
 ) \
