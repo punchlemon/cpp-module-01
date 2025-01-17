@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include "Zombie.hpp"
 
 int main( void ) {
