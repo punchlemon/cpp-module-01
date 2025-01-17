@@ -1,5 +1,4 @@
 #include <iostream>
-#include <sstream>
 #include "Zombie.hpp"
 
 std::string Zombie::getName() const {
