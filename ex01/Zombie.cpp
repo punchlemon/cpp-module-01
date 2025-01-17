@@ -18,7 +18,7 @@ void Zombie::announce() const {
     announceMessage(getName(), "BraiiiiiiinnnzzzZ...");
 }
 
-Zombie::Zombie( std::string name) {
+Zombie::Zombie(std::string name) {
     _name = name;
 }
 

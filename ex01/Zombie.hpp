@@ -14,7 +14,6 @@ class Zombie {
         std::string _name;
 };
 
-Zombie* newZombie(std::string name);
 Zombie *zombieHorde(int n, std::string name);
 
 #endif /* __ZOMBIE_HPP__ */
