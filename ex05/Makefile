@@ -1,6 +1,6 @@
 .PHONY: all clean fclean re
 
-NAME = harl
+NAME = harl2
 
 OUT_DIR = out
 SRCS_DIR = srcs
