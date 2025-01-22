@@ -9,7 +9,6 @@ SRCS = \
 $(addsuffix .cpp, \
 	$(addprefix $(SRCS_DIR)/, \
 		main \
-		replaceAndWrite \
 	) \
 ) \
 

@@ -3,7 +3,17 @@
 #include <cstdlib>
 
 void replaceAndWrite(std::ifstream& inputFile, std::ofstream& outputFile,
-                     const std::string& target, const std::string& replacement);
+                     const std::string& target, const std::string& replacement) {
+    std::string content((std::istreambuf_iterator<char>(inputFile)),
+                         std::istreambuf_iterator<char>());
+    size_t pos = 0;
+    while ((pos = content.find(target, pos)) != std::string::npos) {
+        content.erase(pos, target.length());
+        content.insert(pos, replacement);
+        pos += replacement.length();
+    }
+    outputFile << content;
+}
 
 int main(int argc, char **argv) {
     std::string replaceExtention = ".replace";
