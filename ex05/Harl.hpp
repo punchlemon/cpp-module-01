@@ -2,7 +2,13 @@
 #define __HARL_HPP__
 
 #include <string>
-#include <map>
+
+class Harl;
+
+struct stringFunctionPair {
+    std::string name;
+    void (Harl::*func)(void);
+};
 
 class Harl {
     public:
@@ -14,7 +20,7 @@ class Harl {
         void _info();
         void _warning();
         void _error();
-        std::map<std::string, void (Harl::*)()> _commands;
+        stringFunctionPair _pairs[4];
 };
 
 #endif /* __HARL_HPP__ */

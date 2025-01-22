@@ -1,5 +1,4 @@
 #include <iostream>
-#include <map>
 #include "Harl.hpp"
 
 void Harl::_debug() {
@@ -27,19 +26,25 @@ void Harl::_error() {
 }
 
 void Harl::complain(const std::string& level) {
-    std::map<std::string, void (Harl::*)()>::iterator it = _commands.find(level);
-    if (it != _commands.end()) {
-        std::cout << "[ " << level << " ]" << std::endl;
-        (this->*(it->second))();
-        std::cout << std::endl;
+    for (int i = 0; i < 4; ++i) {
+        if (_pairs[i].name == level) {
+            std::cout << "[ " << level << " ]" << std::endl;
+            (this->*(_pairs[i].func))();
+            std::cout << std::endl;
+            return;
+        }
     }
 }
 
 Harl::Harl() {
-    _commands["DEBUG"] = &Harl::_debug;
-    _commands["INFO"] = &Harl::_info;
-    _commands["WARNING"] = &Harl::_warning;
-    _commands["ERROR"] = &Harl::_error;
+    _pairs[0].name = "DEBUG";
+    _pairs[0].func = &Harl::_debug;
+    _pairs[1].name = "INFO";
+    _pairs[1].func = &Harl::_info;
+    _pairs[2].name = "WARNING";
+    _pairs[2].func = &Harl::_warning;
+    _pairs[3].name = "ERROR";
+    _pairs[3].func = &Harl::_error;
 }
 
 Harl::~Harl() {}
