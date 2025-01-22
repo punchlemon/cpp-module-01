@@ -25,26 +25,33 @@ void Harl::_error() {
         << "This is unacceptable, I want to speak to the manager now." << std::endl;
 }
 
-void Harl::complain(const std::string& level) {
-    for (int i = 0; i < 4; ++i) {
-        if (_pairs[i].name == level) {
-            std::cout << "[ " << level << " ]" << std::endl;
-            (this->*(_pairs[i].func))();
-            std::cout << std::endl;
-            return;
+int Harl::getHarlLevel(const std::string& level) {
+    for (int i = 0; i < NUM_OF_FUNCS; ++i) {
+        if (_names[i] == level) {
+            return i;
         }
+    }
+    return -1;
+}
+
+void Harl::complain(const std::string& level) {
+    int id = getHarlLevel(level);
+    if (id != -1) {
+        std::cout << "[ " << level << " ]" << std::endl;
+        (this->*(_funcs[id]))();
+        std::cout << std::endl;
     }
 }
 
 Harl::Harl() {
-    _pairs[0].name = "DEBUG";
-    _pairs[0].func = &Harl::_debug;
-    _pairs[1].name = "INFO";
-    _pairs[1].func = &Harl::_info;
-    _pairs[2].name = "WARNING";
-    _pairs[2].func = &Harl::_warning;
-    _pairs[3].name = "ERROR";
-    _pairs[3].func = &Harl::_error;
+    _names[0] = "DEBUG";
+    _names[1] = "INFO";
+    _names[2] = "WARNING";
+    _names[3] = "ERROR";
+    _funcs[0] = &Harl::_debug;
+    _funcs[1] = &Harl::_info;
+    _funcs[2] = &Harl::_warning;
+    _funcs[3] = &Harl::_error;
 }
 
 Harl::~Harl() {}
