@@ -1,45 +1,57 @@
 #include <iostream>
-#include <map>
 #include "Harl.hpp"
 
-void Harl::_debug() {
+void Harl::_debug() const {
     std::cout
         << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger." << std::endl
         << "I really do!" << std::endl;
 }
 
-void Harl::_info() {
+void Harl::_info() const {
     std::cout
         << "I cannot believe adding extra bacon costs more money." << std::endl
         << "You didn’t put enough bacon in my burger!" << std::endl
         << "If you did, I wouldn’t be asking for more!" << std::endl;
 }
 
-void Harl::_warning() {
+void Harl::_warning() const {
     std::cout
         << "I think I deserve to have some extra bacon for free." << std::endl
         << "I’ve been coming for years whereas you started working here since last month." << std::endl;
 }
 
-void Harl::_error() {
+void Harl::_error() const {
     std::cout
         << "This is unacceptable, I want to speak to the manager now." << std::endl;
 }
 
-void Harl::complain(const std::string& level) {
-    std::map<std::string, void (Harl::*)()>::iterator it = _commands.find(level);
-    if (it != _commands.end()) {
+int Harl::getHarlLevel(const std::string& level) const {
+    for (int i = 0; i < NUM_OF_FUNCS; ++i) {
+        if (_names[i] == level) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void Harl::complain(const std::string& level) const {
+    int id = getHarlLevel(level);
+    if (id != -1) {
         std::cout << "[ " << level << " ]" << std::endl;
-        (this->*(it->second))();
+        (this->*(_funcs[id]))();
         std::cout << std::endl;
     }
 }
 
 Harl::Harl() {
-    _commands["DEBUG"] = &Harl::_debug;
-    _commands["INFO"] = &Harl::_info;
-    _commands["WARNING"] = &Harl::_warning;
-    _commands["ERROR"] = &Harl::_error;
+    _names[0] = "DEBUG";
+    _names[1] = "INFO";
+    _names[2] = "WARNING";
+    _names[3] = "ERROR";
+    _funcs[0] = &Harl::_debug;
+    _funcs[1] = &Harl::_info;
+    _funcs[2] = &Harl::_warning;
+    _funcs[3] = &Harl::_error;
 }
 
 Harl::~Harl() {}
